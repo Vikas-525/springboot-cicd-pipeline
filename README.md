@@ -219,12 +219,3 @@ Through this project, I gained practical experience in:
 - Implement automated security scanning.
 - Explore safer Kubernetes deployment strategies.
 
-## Author
-
-**Vikas Jain P**
-
-Aspiring Cloud and DevOps Engineer
-
-## Acknowledgment
-
-This project was developed as a hands-on learning project using a Spring Boot application and CI/CD workflow concepts. Credit is given to the original starter project and its author where applicable.
