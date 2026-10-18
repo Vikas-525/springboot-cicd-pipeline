@@ -38,7 +38,7 @@ The application is deployed in an AWS EC2 environment and accessed through a web
 
 The following diagram illustrates the flow of the application through the CI/CD pipeline, from source code management to deployment and browser access.
 
-![Project Architecture Diagram](images/project-architecture.jpeg)
+![Project Architecture Diagram](project-architecture.jpeg)
 
 ### Architecture Flow
 
@@ -56,7 +56,7 @@ The following diagram illustrates the flow of the application through the CI/CD 
 
 The following screenshot shows the Jenkins pipeline used to automate the application build, testing, Docker image publishing, and Kubernetes deployment.
 
-![Jenkins CI/CD Pipeline](images/jenkins-pipeline.jpeg)
+![Jenkins CI/CD Pipeline](jenkins-pipeline.jpeg)
 
 ### Pipeline Stages
 
