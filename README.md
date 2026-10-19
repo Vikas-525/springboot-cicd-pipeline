@@ -1,228 +1,127 @@
 # Spring Boot CI/CD Pipeline Automation
 
-## Project Overview
+## 📌 Project Overview
 
-This project demonstrates the automation of building, testing, containerizing, and deploying a Spring Boot Java application using a CI/CD pipeline.
+This project demonstrates the automation of a CI/CD pipeline for a Spring Boot Java application using Jenkins, Maven, Docker, and Kubernetes.
 
-The pipeline integrates GitHub, Jenkins, Maven, Docker, Docker Hub, and Kubernetes (MicroK8s) to automate the application delivery process. AWS EC2 provides the environment for running the pipeline and deploying the application.
+The pipeline automates the process of checking out source code from GitHub, running tests, building the application, creating a Docker image, pushing the image to Docker Hub, and deploying the application to Kubernetes.
 
-The deployed application is exposed through a Kubernetes NodePort service and can be accessed using a web browser.
+The project demonstrates how CI/CD automation helps streamline application delivery and reduces manual deployment efforts.
 
-## Objectives
+## 🎯 Project Objectives
 
-- Automate application building and deployment using a CI/CD pipeline.
-- Manage application source code using GitHub.
-- Automate testing and building with Maven.
+- Automate application build and deployment using Jenkins.
+- Integrate Maven for building and testing the Spring Boot application.
 - Containerize the application using Docker.
-- Store and distribute Docker images through Docker Hub.
-- Deploy the application using Kubernetes.
-- Understand the integration of cloud infrastructure and DevOps tools.
+- Store Docker images in Docker Hub.
+- Deploy the application to a Kubernetes cluster.
+- Understand the end-to-end CI/CD workflow.
 
-## Technologies Used
+## 🛠️ Technologies Used
 
 | Technology | Purpose |
 |---|---|
-| Java | Application programming language |
-| Spring Boot | Application framework |
-| GitHub | Source code management |
+| Git and GitHub | Source code management |
 | Jenkins | CI/CD pipeline automation |
-| AWS EC2 | Cloud-based compute environment |
-| Linux | Operating system |
-| Maven | Application testing and building |
+| Maven | Application build and testing |
+| Java | Application development |
+| Spring Boot | Application framework |
 | Docker | Application containerization |
-| Docker Hub | Container image registry |
-| Kubernetes (MicroK8s) | Container deployment and management |
-| YAML | Kubernetes configuration files |
+| Docker Hub | Docker image repository |
+| Kubernetes | Container orchestration |
+| Linux | Server and command-line operations |
+| AWS EC2 | Cloud-based server environment |
 
-## Project Architecture
+## 🏗️ Project Architecture
 
-The architecture diagram illustrates how the different tools interact throughout the CI/CD workflow, from source code management to application deployment.
+The architecture illustrates the flow from source code management to automated deployment.
 
-![Project Architecture](images/project-architecture.jpeg)
+![Project Architecture](Images/project-architecture.jpeg)
 
 ### Architecture Flow
 
-**GitHub → Jenkins on AWS EC2 → Maven → Docker → Docker Hub → Kubernetes (MicroK8s) → NodePort Service → Web Browser**
+1. The developer pushes application code to GitHub.
+2. Jenkins checks out the source code.
+3. Maven runs unit tests and builds the application.
+4. Maven integration tests are executed.
+5. Docker builds an image of the application.
+6. Jenkins pushes the Docker image to Docker Hub.
+7. Jenkins deploys the application to Kubernetes.
+8. Kubernetes runs the application in pods.
+9. The Kubernetes service exposes the application so users can access it through a browser.
 
-1. Application source code is maintained in GitHub.
-2. Jenkins checks out the source code and orchestrates the pipeline.
-3. Maven performs application testing and building.
-4. Docker creates a container image.
-5. Docker Hub stores the container image.
-6. Kubernetes deploys the application using the image.
-7. A NodePort service exposes the application for browser access.
+## 🔄 Jenkins CI/CD Pipeline
 
-## Jenkins CI/CD Pipeline
+The Jenkins pipeline automates the application's build, testing, containerization, and deployment process.
 
-The pipeline diagram below illustrates the stages involved in automating the application's build and deployment process.
-
-![Jenkins CI/CD Pipeline](images/jenkins-pipeline.jpeg)
+![Jenkins Pipeline Architecture](Images/jenkins-pipeline.jpeg)
 
 ### Pipeline Stages
 
-| Stage | Description |
-|---|---|
-| Code Checkout | Retrieves source code from GitHub |
-| Maven Unit Test | Executes unit tests |
-| Maven Build | Builds and packages the application |
-| Maven Integration Test | Runs the Maven verification lifecycle |
-| Build Docker Image | Creates the application container image |
-| Push Image to Docker Hub | Publishes the image to Docker Hub |
-| Deploy to Kubernetes | Applies Kubernetes deployment and service configurations |
+**1. Code Checkout**
+- Retrieves the application source code from GitHub.
 
-## CI/CD Workflow
+**2. Maven Unit Test**
+- Executes unit tests to validate application components.
 
-### 1. Source Code Management – GitHub
+**3. Maven Build**
+- Builds the Spring Boot application and generates the required build artifacts.
 
-GitHub stores the Spring Boot application's source code. Jenkins retrieves the code as part of the pipeline.
+**4. Maven Integration Test**
+- Executes integration tests to validate interactions between application components.
 
-Automatic pipeline execution after a code push depends on the Jenkins job and repository trigger configuration.
+**5. Docker Image Build**
+- Creates a Docker image containing the application and its runtime requirements.
 
-### 2. Continuous Integration – Jenkins
+**6. Push Image to Docker Hub**
+- Authenticates with Docker Hub using Jenkins credentials.
+- Pushes the built Docker image to the configured repository.
 
-Jenkins runs on AWS EC2 and orchestrates the CI/CD workflow.
+**7. Kubernetes Deployment**
+- Applies the Kubernetes deployment and service configuration files.
+- Deploys the application to the Kubernetes cluster.
 
-It automates source code checkout, application testing, building, Docker image creation, image publishing, and Kubernetes deployment.
+## 📸 Project Implementation Evidence
 
-### 3. Application Testing and Build – Maven
+The following screenshots demonstrate the implementation and execution of the project.
 
-Maven manages the application's build lifecycle.
+### 1. Jenkins Pipeline
 
-The pipeline uses the following commands:
+Shows the configured Jenkins pipeline used to automate the CI/CD workflow.
 
-**Run unit tests**
-```bash
-mvn test
-```
+![Jenkins Pipeline](screenshots/pipeline.png)
 
-**Clean and build the application**
-```bash
-mvn clean install
-```
+### 2. Jenkins Pipeline Stage View
 
-**Run verification**
-```bash
-mvn verify
-```
+Shows the execution status of the individual pipeline stages.
 
-These commands execute their respective Maven lifecycle phases, including applicable tests and verification tasks.
+![Jenkins Pipeline Stage View](screenshots/Pipeline-stageview.png)
 
-### 4. Containerization – Docker
+### 3. Docker Hub Image
 
-Docker packages the Spring Boot application into a container image using the project's Dockerfile.
+Shows the Docker image published to Docker Hub.
 
-Example command:
+![Docker Hub Image](screenshots/dockerhub.png)
 
-```bash
-docker build -t ci-pipeline .
-```
+### 4. Kubernetes Pods and Deployment
 
-The resulting image can be used to run the application in a containerized environment.
+Shows the Kubernetes pods and deployment configured to run the application.
 
-### 5. Image Registry – Docker Hub
+![Kubernetes Pods and Deployment](screenshots/kubernetes%20pods%20%26%20deploy.png)
 
-After the Docker image is built, Jenkins authenticates with Docker Hub, tags the image, and pushes it to the registry.
+### 5. Kubernetes Service
 
-Example commands:
+Shows the Kubernetes service used to expose the deployed application.
 
-```bash
-docker tag ci-pipeline <dockerhub-username>/ci-pipeline:latest
-docker push <dockerhub-username>/ci-pipeline:latest
-```
+![Kubernetes Service](screenshots/kubernetes%20screenshot.png)
 
-The image is then available for the Kubernetes environment to pull and deploy.
+### 6. Application Output
 
-### 6. Deployment – Kubernetes (MicroK8s)
+Shows the Spring Boot application running successfully and displaying its output in a web browser.
 
-Kubernetes is used to deploy and manage the containerized application.
+![Application Output](screenshots/Application%20in%20browser.png)
 
-The project uses the following configuration files:
-
-- **`deployment.yaml`** – Defines the application deployment and container configuration.
-- **`service.yaml`** – Defines the NodePort service used to expose the application.
-
-Jenkins applies the Kubernetes configurations using:
-
-```bash
-kubectl apply -f deployment.yaml
-kubectl apply -f service.yaml
-```
-
-### 7. Application Access
-
-Once the application is running and the service is configured, it can be accessed through a web browser using the EC2 public IP address and the configured NodePort.
-
-```text
-http://<EC2-Public-IP>:<NodePort>
-```
-
-The EC2 security group and Kubernetes service must permit the required network traffic.
-
-## Project Implementation Evidence
-
-The following screenshots document the actual implementation and deployment process.
-
-### 1. Jenkins Pipeline Execution
-
-Shows the Jenkins pipeline stages and their execution results.
-
-![Jenkins Pipeline Execution](screenshots/jenkins-build.png)
-
-### 2. Maven Build and Testing
-
-Evidence of the application's Maven build and testing process.
-
-![Maven Build and Testing](screenshots/maven-build.png)
-
-### 3. Docker Image
-
-Shows the Docker image created for the application.
-
-![Docker Image](screenshots/docker-image.png)
-
-### 4. Docker Hub Repository
-
-Shows the container image published to Docker Hub.
-
-![Docker Hub Repository](screenshots/docker-hub.png)
-
-### 5. Kubernetes Deployment
-
-Shows the Kubernetes deployment configuration and deployment status.
-
-![Kubernetes Deployment](screenshots/kubernetes-deployment.png)
-
-### 6. Kubernetes Pods
-
-Shows the status of the application's Kubernetes pods.
-
-![Kubernetes Pods](screenshots/kubernetes-pods.png)
-
-### 7. Kubernetes Service
-
-Shows the Kubernetes service used to expose the application.
-
-![Kubernetes Service](screenshots/kubernetes-service.png)
-
-### 8. Application Output
-
-Shows the deployed Spring Boot application running in the browser.
-
-![Application Output](screenshots/application-browser.png)
-
-> **Note:** Update the screenshot paths above to match the exact filenames in your `Screenshots` folder. Keep only the sections for screenshots you have uploaded.
-
-## Application Output
-
-After successful deployment, the application displays:
-
-```text
-Welcome to our DevOps Project !!
-```
-
-The application is accessed through the EC2 public IP address and the configured Kubernetes NodePort.
-
-## Project Structure
+## 📂 Project Structure
 
 ```text
 springboot-cicd-pipeline/
@@ -231,49 +130,51 @@ springboot-cicd-pipeline/
 │   ├── project-architecture.jpeg
 │   └── jenkins-pipeline.jpeg
 │
-├── Screenshots/
-│   ├── jenkins-build.png
-│   ├── maven-build.png
-│   ├── docker-image.png
-│   ├── docker-hub.png
-│   ├── kubernetes-deployment.png
-│   ├── kubernetes-pods.png
-│   ├── kubernetes-service.png
-│   └── application-browser.png
+├── screenshots/
+│   ├── Application in browser.png
+│   ├── Pipeline-stageview.png
+│   ├── dockerhub.png
+│   ├── kubernetes pods & deploy.png
+│   ├── kubernetes screenshot.png
+│   └── pipeline.png
 │
 ├── src/
-├── .gitignore
+│   ├── main/
+│   └── test/
+│
 ├── Dockerfile
+├── Jenkinsfile
 ├── deployment.yaml
 ├── service.yaml
-├── Jenkinsfile
+├── pom.xml
 ├── mvnw
 ├── mvnw.cmd
-├── pom.xml
 └── README.md
 ```
 
-*This is an illustrative structure. The actual filenames and directories should match the contents of your repository.*
+*Note: The file and folder names shown above should match the actual contents of your GitHub repository.*
 
-## Key Learnings
+## 💡 Key Learnings
 
-Through this project, I gained practical experience in:
+Through this project, I gained practical exposure to:
 
-- Managing source code using GitHub.
-- Automating CI/CD workflows with Jenkins.
-- Building and testing Java applications using Maven.
+- Managing application source code using Git and GitHub.
+- Configuring Jenkins for CI/CD automation.
+- Building and testing Java applications with Maven.
 - Creating and publishing Docker images.
-- Using Docker Hub as a container image registry.
 - Deploying containerized applications using Kubernetes.
-- Working with AWS EC2 and Linux environments.
-- Understanding the end-to-end CI/CD workflow.
+- Working with Kubernetes deployments, pods, and services.
+- Understanding the end-to-end software delivery workflow.
+- Working with Linux and a cloud-based server environment.
 
-## Future Improvements
+## 🚀 Future Improvements
 
-- Configure and verify automated pipeline triggers using GitHub webhooks.
-- Add pipeline failure notifications.
-- Implement application monitoring and centralized logging.
-- Introduce automated security scanning.
-- Explore safer Kubernetes deployment strategies.
+- Integrate automated code quality analysis.
+- Implement container image vulnerability scanning.
+- Introduce monitoring and centralized logging.
+- Improve deployment security and credential management.
+- Explore automated rollback strategies for failed deployments.
 
+## 🙏 Acknowledgment
 
+This project was implemented as part of my hands-on learning in Cloud and DevOps technologies, with a focus on understanding CI/CD automation and Kubernetes-based application deployment.
