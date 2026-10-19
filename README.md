@@ -36,7 +36,7 @@ The project demonstrates how CI/CD automation helps streamline application deliv
 
 The architecture illustrates the flow from source code management to automated deployment.
 
-![Project Architecture](Images/project-architecture.jpeg)
+![Project Architecture](images/project-architecture.jpeg)
 
 ### Architecture Flow
 
@@ -54,7 +54,7 @@ The architecture illustrates the flow from source code management to automated d
 
 The Jenkins pipeline automates the application's build, testing, containerization, and deployment process.
 
-![Jenkins Pipeline Architecture](Images/jenkins-pipeline.jpeg)
+![Jenkins Pipeline Architecture](images/jenkins-pipeline.jpeg)
 
 ### Pipeline Stages
 
@@ -113,7 +113,7 @@ Shows the Kubernetes pods and deployment configured to run the application.
 
 Shows the Kubernetes service used to expose the deployed application.
 
-![Kubernetes Service](screenshots/kubernetes%20screenshot.png)
+![Kubernetes Service](screenshots/kubernetes%20svc.png)
 
 ### 6. Application Output
 
